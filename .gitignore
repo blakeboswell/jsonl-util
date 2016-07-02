@@ -1,0 +1,7 @@
+.DS_Store
+output/
+test_data/
+*.pdf
+*.htm
+*.jsonl
+*.gz
