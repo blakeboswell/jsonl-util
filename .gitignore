@@ -5,3 +5,5 @@ test_data/
 *.htm
 *.jsonl
 *.gz
+.ipynb_checkpoints/
+*.ipynb
