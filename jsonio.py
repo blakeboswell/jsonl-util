@@ -19,10 +19,10 @@ class Jsonliter():
         self.test = test_dir
 
     def train_iter(self):
-        return itt.tee((json.loads(line) for line in gzip.open(self.train)))
+        return itt.tee((json.loads(line) for line in gzip.open(self.train, 'rb')))
 
     def test_iter(self):
-        return itt.tee((json.loads(line) for line in gzip.open(self.test)))
+        return itt.tee((json.loads(line) for line in gzip.open(self.test, 'rb')))
 
 
 def _diriter(root_dir, extension):
