@@ -1,4 +1,4 @@
-## JSON Line Utility
+## Document JSON Line Utility
 
 Python 2.7+
 
