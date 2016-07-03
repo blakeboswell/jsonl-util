@@ -7,9 +7,9 @@ Python 2.7+
 Call from python:
 
 ``` python
-import jsonio
-jsonio.process_files('test_data', 'output/docs.jsonl.gz')
-jsonio.process_files('test_data', 'output/docs.jsonl.gz')
+from jsonio import process_filter
+process_files('test_data', 'output/docs.jsonl.gz')
+process_files('test_data', 'output/docs.jsonl.gz')
 ```
 
 or from command line:
@@ -22,8 +22,8 @@ python jsonio.py 'test_data' 'output/test.jsonl.gz'
 Class `Jsonliter` used for iterating over jsonl file.
 
 ``` python
-import jsonio
-docs = jsonio.Jsonliter('output/docs.jsonl.gz', 'output/docs.jsonl.gz')
+from jsonio import Jsonliter
+docs = Jsonliter('output/docs.jsonl.gz', 'output/docs.jsonl.gz')
 
 train_x, train_y = docs.train_iter()
 model.fit(x, y)
