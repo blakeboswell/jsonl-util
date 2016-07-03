@@ -2,10 +2,27 @@ from __future__ import print_function
 import os
 import sys
 import codecs  # sub for python 3 style open
+import logging
 import lxml
 from lxml.html.clean import Cleaner
 import gzip
 import json
+import itertools as itt
+
+
+class Jsonliter():
+    '''
+        iterate over documents in a jsonl file
+    '''
+    def __init__(self, train_dir, test_dir):
+        self.train = train_dir
+        self.test = test_dir
+
+    def train_iter(self):
+        return itt.tee((json.loads(line) for line in gzip.open(self.train)))
+
+    def test_iter(self):
+        return itt.tee((json.loads(line) for line in gzip.open(self.test)))
 
 
 def _diriter(root_dir, extension):
@@ -49,14 +66,14 @@ def txt_to_jsonl(root_dir, out_file_path):
                 jsonl.write('\n')
 
 
-def _txt_del(root_dir):
+def txt_del(root_dir):
     ''' remove text files after process files is complete
     '''
     for txt_file, txt_path in _diriter(root_dir, '.txt'):
         os.remove(txt_path)
 
 
-def _process_files(file_dir, out_file_path):
+def process_files(file_dir, out_file_path):
     ''' transform pdf, htm files to txt, load txt to jsonl file
     '''
     print('pdf to text ...')
@@ -87,8 +104,8 @@ if __name__ == '__main__':
         sys.exit(2)
 
     try:
-        _process_files(FILE_DIR, OUTPUT_FILE_PATH)
+        process_files(FILE_DIR, OUTPUT_FILE_PATH)
     except Exception as ex:
         logging.exception('Awesome Job on your code fail!.')
     finally:
-        _txt_del(FILE_DIR)
+        txt_del(FILE_DIR)
