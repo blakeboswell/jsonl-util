@@ -26,6 +26,5 @@ import jsonio
 docs = jsonio.Jsonliter('output/docs.jsonl.gz', 'output/docs.jsonl.gz')
 
 train_x, train_y = docs.train_iter()
-for x, y in zip(x, y):
-    model.fit(x, y)
+model.fit(x, y)
 ```
